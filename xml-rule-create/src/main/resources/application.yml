@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: springboot-redisson
+  redis:
+    redisson:
+      file: classpath:redisson.yml
+
+server:
+  port: 9888
+
+liteflow:
+  rule-source: config/flow.el.xml
+

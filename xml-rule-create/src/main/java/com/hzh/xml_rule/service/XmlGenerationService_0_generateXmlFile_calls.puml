@@ -1,0 +1,176 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "com.hzh.xml_rule.service.XmlGenerationService#generateXmlFile()",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "com.hzh.xml_rule.service.XmlGenerationService",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_103830 { 
+   	label=hzh
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1723121232 { 
+   	label=liteflow_redis
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_409555580 { 
+   	label=RedisService
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   RedisService1875115772XXXgetValue1808118735[
+	label="+ getValue()"
+	style=filled
+	fillcolor=white
+	tooltip="RedisService
+
+null"
+	fontcolor=darkgreen
+];
+
+RedisService1875115772XXXkeys0[
+	label="+ keys()"
+	style=filled
+	fillcolor=white
+	tooltip="RedisService
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_325436548 { 
+   	label=xml_rule
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_1415854564 { 
+   	label=XmlGenerationService
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   XmlGenerationService1802036080XXXgenerateXmlFile0[
+	label="+ generateXmlFile()"
+	style=filled
+	fillcolor=white
+	tooltip="XmlGenerationService
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_365503343 { 
+   	label=RuleApplication
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   RuleApplication622862025XXXrun1814637725[
+	label="+ run()"
+	style=filled
+	fillcolor=white
+	tooltip="RuleApplication
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+} 
+
+'edges    
+RuleApplication622862025XXXrun1814637725 -> XmlGenerationService1802036080XXXgenerateXmlFile0;
+XmlGenerationService1802036080XXXgenerateXmlFile0 -> RedisService1875115772XXXgetValue1808118735;
+XmlGenerationService1802036080XXXgenerateXmlFile0 -> RedisService1875115772XXXkeys0;
+    
+}
+@enduml
