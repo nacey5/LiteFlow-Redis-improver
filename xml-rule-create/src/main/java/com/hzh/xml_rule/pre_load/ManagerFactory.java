@@ -54,10 +54,11 @@ public class ManagerFactory {
      */
     private static void load(String className, long lastModified) {
         MyClasslLoader myClasslLoader = new MyClasslLoader(CLASS_PATH);
+        //todo 在这里要清除一下jvm中的缓存
         Class loadClass = null;
         // 加载
         try {
-            loadClass = myClasslLoader.loadClass(className);
+            loadClass = myClasslLoader.findClass(className);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
