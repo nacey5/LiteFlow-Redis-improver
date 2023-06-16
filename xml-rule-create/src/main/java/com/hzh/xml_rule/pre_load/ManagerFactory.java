@@ -10,6 +10,7 @@ import com.hzh.xml_rule.manager.BaseManager;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,6 @@ public class ManagerFactory {
     public static final String CLASS_PATH = "/Users/dahuang/IdeaProjects/LiteFlow-Redis-improver/xml-rule-create/target/classes/";
 
     /** 实现热加载的类的全名称(包名+类名 ) */
-    public static final String MY_MANAGER = "com.hzh.loader.Hello";
 
     public static BaseManager getManager(String className) {
         File loadFile = new File(CLASS_PATH + className.replaceAll("\\.", "/") + ".class");
@@ -54,7 +54,6 @@ public class ManagerFactory {
      */
     private static void load(String className, long lastModified) {
         MyClasslLoader myClasslLoader = new MyClasslLoader(CLASS_PATH);
-        //todo 在这里要清除一下jvm中的缓存
         Class loadClass = null;
         // 加载
         try {

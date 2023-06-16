@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><flow><chain name="chain1">THEN(a,b,c)</chain></flow>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><flow><chain name="chain1">THEN(a,b,c,d)</chain></flow>
