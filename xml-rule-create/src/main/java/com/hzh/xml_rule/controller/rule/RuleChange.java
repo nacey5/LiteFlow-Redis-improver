@@ -1,6 +1,7 @@
 
 package com.hzh.xml_rule.controller.rule;
 
+import com.hzh.all.annotation.CustomParameterValidation;
 import com.hzh.xml_rule.parse.RuleParser;
 import com.hzh.xml_rule.pre_load.MsgHandle;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class RuleChange {
     }
 
     @GetMapping("/pre_load/{fullClassName}")
-    public void preLoad(@PathVariable String fullClassName){
+    public void preLoad(@PathVariable @CustomParameterValidation String fullClassName){
         new Thread(new MsgHandle(fullClassName)).start();
     }
 }

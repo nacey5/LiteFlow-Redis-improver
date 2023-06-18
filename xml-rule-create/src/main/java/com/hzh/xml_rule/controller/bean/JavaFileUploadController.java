@@ -7,23 +7,24 @@ package com.hzh.xml_rule.controller.bean;
 
 import com.hzh.all.annotation.CustomMethodValidation;
 import com.hzh.xml_rule.manager.tran.FileManager;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.hzh.xml_rule.request.CodeRequest;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
+@RequestMapping("/code")
 public class JavaFileUploadController {
 
     @Resource
     private FileManager fileManager;
 
-    @PostMapping("/upload/{fullClassName}")
+    @PostMapping("/upload")
     @CustomMethodValidation
-    public Boolean uploadJavaFile(@RequestBody String javaCode, @PathVariable String fullClassName) {
-        return fileManager.uploadJavaFile(javaCode, fullClassName);
+    public Boolean uploadJavaFile(@RequestBody CodeRequest codeRequest) {
+        codeRequest.check();
+        return fileManager.uploadJavaFile(codeRequest.getJavaCode(),
+            codeRequest.getFullClassName());
     }
 
 }

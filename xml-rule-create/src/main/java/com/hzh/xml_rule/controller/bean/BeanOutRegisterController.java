@@ -1,8 +1,11 @@
 
 package com.hzh.xml_rule.controller.bean;
 
+import com.hzh.all.annotation.CustomMethodValidation;
 import com.hzh.all.annotation.CustomParameterValidation;
 import com.hzh.xml_rule.manager.tran.BeanManager;
+import com.hzh.xml_rule.request.BeanRequest;
+import com.hzh.xml_rule.request.RegisterBeanRequest;
 import com.yomahub.liteflow.core.FlowExecutor;
 import com.yomahub.liteflow.spring.ComponentScanner;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -29,14 +32,18 @@ public class BeanOutRegisterController {
     @Resource
     private BeanManager beanManager;
 
-    @PostMapping("/register-bean/{fullClassName}/{beanName}")
-    public Boolean registerBean(@PathVariable String fullClassName,@PathVariable String beanName) {
-        return beanManager.registerBean(fullClassName, beanName);
+    @PostMapping("/register-bean")
+    @CustomMethodValidation
+    public Boolean registerBean(@RequestBody RegisterBeanRequest registerBeanRequest) {
+        registerBeanRequest.check();
+        return beanManager.registerBean(registerBeanRequest.getFullClassName(),
+            registerBeanRequest.getBeanName());
     }
 
-    @GetMapping("/get-bean/{beanName}")
-    public Object getBean(@PathVariable @CustomParameterValidation String beanName) {
-        return beanManager.getBeanByBeanName(beanName);
+    @GetMapping("/get-bean")
+    public Object getBean(@RequestBody BeanRequest beanRequest) {
+        beanRequest.check();
+        return beanManager.getBeanByBeanName(beanRequest.getBeanName());
     }
 
     @GetMapping("/listBeans")
