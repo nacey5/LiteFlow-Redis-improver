@@ -1,13 +1,13 @@
 
 package com.hzh.xml_rule;
 
+import com.hzh.xml_rule.config.EnableConfig;
 import com.hzh.xml_rule.service.XmlGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author dahuang
@@ -15,12 +15,7 @@ import org.springframework.context.annotation.ComponentScans;
  */
 
 @SpringBootApplication
-@ComponentScans({
-    @ComponentScan("com.hzh.liteflow_redis.listener.sub_pub"),
-    @ComponentScan("com.hzh.liteflow_redis.service"),
-    @ComponentScan("com.hzh.xml_rule.service"),
-    @ComponentScan("com.hzh.xml_rule.component")
-})
+@Import(EnableConfig.class)
 public class RuleApplication implements CommandLineRunner {
 
     @Autowired

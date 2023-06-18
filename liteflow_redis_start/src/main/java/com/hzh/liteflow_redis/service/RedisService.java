@@ -1,11 +1,9 @@
 
 package com.hzh.liteflow_redis.service;
 
-import com.hzh.liteflow_redis.listener.sub_pub.MyRedisSubscriber;
-import lombok.RequiredArgsConstructor;
+import com.hzh.liteflow_redis.listener.sub_pub.RuleChangeRedisSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,7 +21,7 @@ public class RedisService {
     @Resource
     private RedissonClient redissonClient;
     @Resource
-    private MyRedisSubscriber myRedisSubscriber;
+    private RuleChangeRedisSubscriber ruleChangeRedisSubscriber;
 
 
     public RedisService(RedissonClient redissonClient) {
@@ -32,7 +30,7 @@ public class RedisService {
 
     public void setValue(String key, String value) {
         redissonClient.getBucket(key).set(value);
-        myRedisSubscriber.sendMessage(MyRedisSubscriber.TOPIC,key+"#"+value);
+        ruleChangeRedisSubscriber.sendMessage(RuleChangeRedisSubscriber.TOPIC,key+"#"+value);
         log.info("success");
     }
 

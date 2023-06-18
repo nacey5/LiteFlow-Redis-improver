@@ -2,9 +2,6 @@
 package com.hzh.xml_rule.service;
 
 import com.hzh.liteflow_redis.service.RedisService;
-import com.hzh.xml_rule.base.Rule;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

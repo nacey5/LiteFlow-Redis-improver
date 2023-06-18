@@ -13,8 +13,8 @@ import java.io.FileInputStream;
  * <p>
  * 自定义 Java类加载器来实现Java 类的热加载
  *
- * @Author niujinpeng
- * @Date 2019/10/24 23:22
+ * @Author dahuang
+ * @Date 2023-06-14
  */
 public class MyClasslLoader extends ClassLoader {
 

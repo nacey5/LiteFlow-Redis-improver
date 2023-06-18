@@ -18,8 +18,8 @@ import java.util.Map;
  * <p>
  * 加载 manager 的工厂
  *
- * @Author niujinpeng
- * @Date 2019/10/24 23:38
+ * @Author dahuang
+ * @Date 2023-06-14
  */
 public class ManagerFactory {
 

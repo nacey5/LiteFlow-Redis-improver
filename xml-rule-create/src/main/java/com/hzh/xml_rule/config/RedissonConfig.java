@@ -1,7 +1,7 @@
 
 package com.hzh.xml_rule.config;
 
-import com.hzh.xml_rule.sub_pub.MyMessageListener;
+import com.hzh.xml_rule.sub_pub.RuleMessageListener;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
 
-import static com.hzh.liteflow_redis.listener.sub_pub.MyRedisSubscriber.TOPIC;
+import static com.hzh.liteflow_redis.listener.sub_pub.RuleChangeRedisSubscriber.TOPIC;
 
 /**
  * @author dahuang
@@ -19,7 +19,7 @@ import static com.hzh.liteflow_redis.listener.sub_pub.MyRedisSubscriber.TOPIC;
 public class RedissonConfig {
 
     @Resource
-    private MyMessageListener messageReceiver;
+    private RuleMessageListener messageReceiver;
 
     @Resource
     private RedissonClient redissonClient;

@@ -11,6 +11,7 @@
     <modules>
         <module>xml-rule-create</module>
         <module>liteflow_redis_start</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -72,6 +73,12 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>2.5.7</version>
         </dependency>
 
     </dependencies>
