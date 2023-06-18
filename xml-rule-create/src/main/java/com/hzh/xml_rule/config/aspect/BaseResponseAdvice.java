@@ -21,6 +21,7 @@
 package com.hzh.xml_rule.config.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hzh.xml_rule.config.BaseResponse;
 import lombok.NonNull;
 import org.springframework.core.MethodParameter;
@@ -54,6 +55,7 @@ public class BaseResponseAdvice implements ResponseBodyAdvice<Object> {
 
         if (body instanceof String) {
             ObjectMapper om = new ObjectMapper();
+            om.configure(SerializationFeature.FAIL_ON_SELF_REFERENCES, false);
             try {
                 return om.writeValueAsString(BaseResponse.success(body));
             } catch (IOException e) {

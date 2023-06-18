@@ -30,7 +30,7 @@ public interface BeanManager {
 
     Boolean registerBean(String fullClassName,String beanName);
 
-    Object getBeanByBeanName(String bean);
+    String  getBeanByBeanName(String bean);
 
     List<String> listAllBeanName();
 }

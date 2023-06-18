@@ -84,11 +84,11 @@ public class BeanManagerImpl implements BeanManager {
     }
 
     @Override
-    public Object getBeanByBeanName(String beanName) {
+    public String  getBeanByBeanName(String beanName) {
         Object bean = applicationContext.getBean(beanName);
         if (bean != null) {
             log.info("Bean found: {}",beanName);
-            return bean;
+            return beanName;
         } else {
             log.warn("Bean not found:{} ",beanName);
             throw new RuntimeException("the bean "+beanName+"not found");

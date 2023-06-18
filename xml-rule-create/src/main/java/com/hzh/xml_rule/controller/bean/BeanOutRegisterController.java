@@ -41,7 +41,7 @@ public class BeanOutRegisterController {
     }
 
     @GetMapping("/get-bean")
-    public Object getBean(@RequestBody BeanRequest beanRequest) {
+    public String getBean(@RequestBody BeanRequest beanRequest) {
         beanRequest.check();
         return beanManager.getBeanByBeanName(beanRequest.getBeanName());
     }
