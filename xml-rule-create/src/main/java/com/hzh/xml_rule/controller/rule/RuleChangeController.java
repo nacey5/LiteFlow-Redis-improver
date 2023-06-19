@@ -16,8 +16,8 @@ import javax.annotation.Resource;
  * @version : RuleChange.java, v 0.1 2023-06-11 19:50 dahuang
  */
 @RestController
-@RequestMapping("change")
-public class RuleChange {
+@RequestMapping("/change")
+public class RuleChangeController {
 
     @Resource
     private RuleParser ruleParser;

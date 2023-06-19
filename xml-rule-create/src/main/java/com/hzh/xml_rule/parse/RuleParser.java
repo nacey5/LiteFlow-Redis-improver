@@ -5,6 +5,7 @@ import com.hzh.xml_rule.service.XmlGenerationService;
 import com.hzh.xml_rule.sync.XmlWriterAsync;
 import com.yomahub.liteflow.parser.el.XmlFlowELParser;
 import com.yomahub.liteflow.spi.holder.PathContentParserHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import java.util.List;
  */
 
 @Component
+@Slf4j
 public class RuleParser extends XmlFlowELParser {
 
     @Resource
@@ -34,6 +36,7 @@ public class RuleParser extends XmlFlowELParser {
 
     public void parseRedis() throws Exception {
         //find from local resource
+        log.info("rule change from redis");
         List<String> contentList = new ArrayList<>();
         if (!extracted(contentList)) {
             parse(contentList);

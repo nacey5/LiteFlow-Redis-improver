@@ -81,6 +81,14 @@
             <version>2.5.7</version>
         </dependency>
 
+        <!-- Quartz依赖 -->
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
     </dependencies>
 
 

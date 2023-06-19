@@ -1,7 +1,7 @@
 
 package com.hzh.xml_rule.sub_pub;
 
-import com.hzh.xml_rule.controller.rule.RuleChange;
+import com.hzh.xml_rule.controller.rule.RuleChangeController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.redisson.api.listener.MessageListener;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 public class RuleMessageListener implements MessageListener<String> {
 
     @Resource
-    private RuleChange ruleChange;
+    private RuleChangeController ruleChangeController;
 
     @Override
     public void onMessage(CharSequence charSequence, String message) {
@@ -29,7 +29,7 @@ public class RuleMessageListener implements MessageListener<String> {
         String[] split = message.split("#");
         log.warn("the new rule:{}",split[1]);
         try {
-            ruleChange.changeRule();
+            ruleChangeController.changeRule();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
