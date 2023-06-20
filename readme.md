@@ -2,7 +2,8 @@
 将规则信息初步与外部的redis进行对接，目前已支持通过http请求更改规则信息
 
 ## 架构图
-![image](https://github.com/nacey5/LiteFlow-Redis-improver/assets/85286598/1918d27d-603d-425f-8de7-e273770d2e2f)
+![image](https://github.com/nacey5/LiteFlow-Redis-improver/assets/85286598/f2df746c-5ce4-403d-a154-052dfc1b27d7)
+
 
 规划如下：
 1. 成功对接redis
