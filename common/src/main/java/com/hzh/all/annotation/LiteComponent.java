@@ -23,8 +23,6 @@ package com.hzh.all.annotation;
 import com.hzh.all.GrayScheduling;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
-import com.yomahub.liteflow.annotation.LiteflowComponent;
-
 import java.lang.annotation.*;
 
 /**
@@ -38,11 +36,8 @@ import java.lang.annotation.*;
 @Component
 public @interface LiteComponent {
 
-    @AliasFor(annotation = LiteflowComponent.class, attribute = "value")
+    @AliasFor(annotation = Component.class, attribute = "value")
     String value() default "";
-
-    @AliasFor(annotation = LiteflowComponent.class, attribute = "value")
-    String id() default "";
 
     GrayScheduling tag() default GrayScheduling.DEFAULT;
 }

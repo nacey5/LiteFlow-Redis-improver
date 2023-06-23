@@ -17,6 +17,7 @@ import java.util.Map;
  * @version : ACmp.java, v 0.1 2023-06-11 14:38 dahuang
  */
 @LiteComponent("a")
+//@Component("a")
 @Slf4j
 public class ACmp extends NodeComponent implements BaseManager, TagConsider {
 
@@ -29,6 +30,7 @@ public class ACmp extends NodeComponent implements BaseManager, TagConsider {
 
     @Override
     public void beforeProcess() {
+        super.beforeProcess();
         //todo 对标志进行识别并进行统一的插入
         Class<? extends ACmp> clazz = this.getClass();
         if (clazz.isAnnotationPresent(LiteComponent.class)) {
@@ -37,7 +39,6 @@ public class ACmp extends NodeComponent implements BaseManager, TagConsider {
             considerTag(tag);
         }
         //如果没有这个标签，可以识别为其他的bean类，不做其他处理，只执行普通业务
-        super.beforeProcess();
     }
 
     @Override
