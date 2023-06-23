@@ -12,6 +12,7 @@
         <module>xml-rule-create</module>
         <module>liteflow_redis_start</module>
         <module>common</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
@@ -95,6 +96,8 @@
             <version>2.10.3</version>
             <scope>compile</scope>
         </dependency>
+
+
 
     </dependencies>
 

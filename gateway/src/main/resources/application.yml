@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: example_route
+          uri: http://127.0.0.1:8080
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Custom-Header, CustomValue
+        - id: fallback_route
+          uri: forward:/fallback
+          predicates:
+            - Path=/fallback/**
+          filters:
+            - RewritePath=/fallback/(?<segment>.*), /$\{segment}
+      global-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Hello
+            preLogger: true
+            postLogger: true
+
+  main:
+    web-application-type: reactive
+
+server:
+  port: 8888
