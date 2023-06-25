@@ -4,11 +4,14 @@ spring:
   redis:
     redisson:
       file: classpath:redisson.yml
+  main:
+    web-application-type: reactive
 
 server:
   port: 9888
 
 liteflow:
   rule-source: config/flow.el.xml
+
 
 

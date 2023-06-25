@@ -17,7 +17,7 @@ import java.util.Map;
  * @version : ACmp.java, v 0.1 2023-06-11 14:38 dahuang
  */
 @Component("a")
-@LiteComponent
+//@LiteComponent("a")
 @Slf4j
 public class ACmp extends NodeComponent implements BaseManager, TagConsider {
 

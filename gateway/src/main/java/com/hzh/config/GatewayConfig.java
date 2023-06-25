@@ -42,7 +42,7 @@ public class GatewayConfig implements WebFluxConfigurer {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
             .route("example_route", r -> r.path("/api")
-                .uri("http://127.0.0.1:8080"))
+                .uri("http://127.0.0.1:9888"))
             .build();
     }
 
