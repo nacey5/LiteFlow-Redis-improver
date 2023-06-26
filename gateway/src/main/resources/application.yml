@@ -2,19 +2,26 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: example_route
-          uri: http://127.0.0.1:9888
-          predicates:
-            - Path=/api/**
-          filters:
-            - StripPrefix=1
-            - AddRequestHeader=X-Custom-Header, CustomValue
+#        - id: blue_route
+#          uri: http://127.0.0.1:9888
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - StripPrefix=1
+#            - AddRequestHeader=X-Custom-Header, CustomValue
         - id: fallback_route
           uri: forward:/fallback
           predicates:
             - Path=/fallback/**
           filters:
             - RewritePath=/fallback/(?<segment>.*), /$\{segment}
+        - id: green_route
+          uri: http://127.0.0.1:9888
+          predicates:
+              - Path=/gray/**
+          filters:
+              - StripPrefix=1
+              - AddRequestHeader=X-Custom-Header, CustomValue
       global-filters:
         - name: GlobalFilter
           args:
@@ -27,3 +34,12 @@ spring:
 
 server:
   port: 8888
+
+uri:
+  default: http://127.0.0.1:8888
+  blue: http://127.0.0.1:9888
+  green: http://127.0.0.1:9899
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG

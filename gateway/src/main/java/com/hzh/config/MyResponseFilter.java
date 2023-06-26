@@ -20,7 +20,6 @@
  */
 package com.hzh.config;
 
-import com.hzh.mmon.BaseResponse;
 import org.springframework.stereotype.Component;
 
 /**
