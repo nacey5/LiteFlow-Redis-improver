@@ -4,6 +4,7 @@ package com.hzh.liteflow_redis.service;
 import com.hzh.liteflow_redis.listener.sub_pub.RuleChangeRedisSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RedisService {
 
-    @Resource
-    private RedissonClient redissonClient;
+    @Qualifier("redissonClient1")
+    private final RedissonClient redissonClient;
     @Resource
     private RuleChangeRedisSubscriber ruleChangeRedisSubscriber;
 

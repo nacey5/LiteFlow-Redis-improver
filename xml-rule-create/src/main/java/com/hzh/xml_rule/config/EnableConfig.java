@@ -17,7 +17,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
     @ComponentScan("com.hzh.liteflow_redis.service"),
     @ComponentScan("com.hzh.xml_rule.service"),
     @ComponentScan("com.hzh.xml_rule.component"),
-    @ComponentScan("com.hzh.xml_rule.config.**")
+    @ComponentScan("com.hzh.xml_rule.config.**"),
+    @ComponentScan("com.hzh.holder")
 })
 public class EnableConfig {
 }

@@ -1,8 +1,9 @@
-package com.hzh.config;
+package com.hzh.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hzh.mmon.BaseResponse;
+import com.hzh.util.OrderedUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -81,6 +82,6 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -1;
+        return OrderedUtil.MIN_CURE;
     }
 }

@@ -5,6 +5,7 @@ package com.hzh.config;
  * @version : GatewayConfig.java, v 0.1 2023-06-23 23:56 dahuang
  */
 
+import com.hzh.filter.GrayFilter;
 import com.hzh.util.ColorAloUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
