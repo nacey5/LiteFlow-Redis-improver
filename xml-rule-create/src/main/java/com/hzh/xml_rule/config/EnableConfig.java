@@ -13,6 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScans({
+    @ComponentScan("com.hzh.liteflow_redis.instance"),
     @ComponentScan("com.hzh.liteflow_redis.listener.sub_pub"),
     @ComponentScan("com.hzh.liteflow_redis.service"),
     @ComponentScan("com.hzh.xml_rule.service"),

@@ -4,6 +4,7 @@ package com.hzh.liteflow_redis.listener.sub_pub;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RuleChangeRedisSubscriber {
-    @Autowired
-    private RedissonClient redissonClient;
+    private final RedissonClient redissonClient;
+
+    public RuleChangeRedisSubscriber(@Qualifier("redissonClient1") RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
+    }
 
     public static final String TOPIC="rule";
 

@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RedisService {
 
-    @Qualifier("redissonClient1")
+
     private final RedissonClient redissonClient;
     @Resource
     private RuleChangeRedisSubscriber ruleChangeRedisSubscriber;
 
 
-    public RedisService(RedissonClient redissonClient) {
+    public RedisService(@Qualifier("redissonClient1") RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 

@@ -4,6 +4,8 @@ package com.hzh.xml_rule.config;
 import com.hzh.xml_rule.sub_pub.RuleMessageListener;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,11 +20,16 @@ import static com.hzh.liteflow_redis.listener.sub_pub.RuleChangeRedisSubscriber.
 @Configuration
 public class RedissonConfig {
 
-    @Resource
-    private RuleMessageListener messageReceiver;
+    private final RuleMessageListener messageReceiver;
 
-    @Resource
-    private RedissonClient redissonClient;
+    private final RedissonClient redissonClient;
+
+    public RedissonConfig(@Autowired RuleMessageListener messageReceiver, @Qualifier("redissonClient1") RedissonClient redissonClient) {
+        this.messageReceiver = messageReceiver;
+        this.redissonClient = redissonClient;
+    }
+
+
 
     @Bean
     public void registerMessageListener() {

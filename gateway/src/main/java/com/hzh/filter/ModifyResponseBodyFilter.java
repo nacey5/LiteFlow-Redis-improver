@@ -82,6 +82,6 @@ public class ModifyResponseBodyFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return OrderedUtil.MIN_CURE;
+        return OrderedUtil.MAX_CURE;
     }
 }

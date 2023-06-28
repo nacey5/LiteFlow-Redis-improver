@@ -32,16 +32,16 @@ import java.util.concurrent.TimeUnit;
  * @author dahuang
  * @version : AkRedisService.java, v 0.1 2023-06-29 01:01 dahuang
  */
-@Service
+@Service("AkRedisService")
 @Slf4j
 public class AkRedisService {
-    @Qualifier("redissonClient2")
+
     private final RedissonClient redissonClient;
 
     private static final long AK_EXPIRATION_SECONDS = 3600; // AK过期时间（秒）
     private static final String AK_PREFIX = "ak:";
 
-    public AkRedisService(RedissonClient redissonClient) {
+    public AkRedisService(@Qualifier("redissonClient2") RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 

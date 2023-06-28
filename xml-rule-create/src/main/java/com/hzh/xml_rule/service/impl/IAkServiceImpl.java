@@ -22,6 +22,8 @@ package com.hzh.xml_rule.service.impl;
 
 import com.hzh.liteflow_redis.service.AkRedisService;
 import com.hzh.xml_rule.service.IAkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,8 +35,11 @@ import javax.annotation.Resource;
 @Service
 public class IAkServiceImpl implements IAkService {
 
-    @Resource
-    private AkRedisService akRedisService;
+    private final AkRedisService akRedisService;
+
+    public IAkServiceImpl(@Qualifier("AkRedisService") AkRedisService akRedisService) {
+        this.akRedisService = akRedisService;
+    }
 
     @Override
     public String saveTheAkInfoToRedis(String ak, String sk) {
