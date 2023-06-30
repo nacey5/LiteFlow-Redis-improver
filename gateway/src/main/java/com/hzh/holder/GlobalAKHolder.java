@@ -32,7 +32,7 @@ public class GlobalAKHolder {
 
     private final ConcurrentHashMap<String, String> akMap = new ConcurrentHashMap<>();
 
-    public Object getData(String key) {
+    public String getData(String key) {
         return akMap.get(key);
     }
 

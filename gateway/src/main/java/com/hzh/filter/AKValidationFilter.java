@@ -20,10 +20,13 @@
  */
 package com.hzh.filter;
 
+import com.hzh.holder.GlobalAKHolder;
+import com.hzh.liteflow_redis.service.AkRedisService;
 import com.hzh.util.OrderedUtil;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -38,10 +41,21 @@ import java.util.Arrays;
  * @version : AKValidationFilter.java, v 0.1 2023-06-27 14:28 dahuang
  */
 @Component
-public class AKValidationFilter implements GatewayFilter, Ordered {
+public class AKValidationFilter implements GlobalFilter, Ordered {
 
     private static final String AK_HEADER = "AK"; // AK在请求头中的字段名
-    private static final String APPLY_AK_PATH = "http://127.0.0.1:8888/api/ak/applyAK ｜ http://127.0.0.1:8888/gray/ak/applyAK"; // 申请AK的路径
+    private static final String APPLY_AK_PATH =
+        "/api/ak/applyAK | /gray/ak/applyAK"; // 申请AK的路径
+
+    private final GlobalAKHolder globalAKHolder;
+
+    private final AkRedisService akRedisService;
+
+    public AKValidationFilter(GlobalAKHolder globalAKHolder,
+        @Qualifier("AkRedisService") AkRedisService akRedisService) {
+        this.globalAKHolder = globalAKHolder;
+        this.akRedisService = akRedisService;
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -65,15 +79,33 @@ public class AKValidationFilter implements GatewayFilter, Ordered {
     }
 
     private boolean validPath(String requestUri) {
-        String[] allPath = APPLY_AK_PATH.split("\\|");
-        return Arrays.stream(allPath).anyMatch(a->a.equals(requestUri));
+        String[] allPath = APPLY_AK_PATH.split("\\s*\\|\\s*");
+        return Arrays.stream(allPath).anyMatch(a -> a.equals(requestUri));
     }
 
     // 实际的AK校验逻辑，根据自己的业务需求进行实现
     private boolean isValidAK(String ak) {
-        // TODO: 根据AK进行有效性校验的逻辑
+        //根据AK进行有效性校验的逻辑
+        boolean ret = false;
+        ret = authAkInCache(ak);
+        ret = ret || getAkInRedis(ak);
         // 这里只做示例，始终返回true，表示AK有效
-        return true;
+        return ret;
+    }
+
+    private boolean getAkInRedis(String ak) {
+        boolean ret=false;
+        String data = akRedisService.getValue(ak);
+        if (StringUtils.isNotBlank(data)) {
+            ret=true;
+            globalAKHolder.setData(ak,data);
+        }
+        return ret;
+    }
+
+    private boolean authAkInCache(String ak) {
+        String data = globalAKHolder.getData(ak);
+        return StringUtils.isNotBlank(data);
     }
 
     // 处理无效AK的响应

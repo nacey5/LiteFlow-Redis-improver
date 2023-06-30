@@ -41,6 +41,12 @@
             <classifier>osx-x86_64</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>com.hzh</groupId>
+            <artifactId>liteflow_redis_start</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>
