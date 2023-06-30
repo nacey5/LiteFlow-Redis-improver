@@ -18,10 +18,17 @@ spring:
         - id: green_route
           uri: http://127.0.0.1:9888
           predicates:
-              - Path=/gray/**
+              - Path=/blue/**
           filters:
               - StripPrefix=1
               - AddRequestHeader=X-Custom-Header, CustomValue
+        - id: blue_route
+          uri: http://127.0.0.1:9899
+          predicates:
+            - Path=/green/**
+          filters:
+            - StripPrefix=1
+            - AddRequestHeader=X-Custom-Header, CustomValue
       global-filters:
         - name: GlobalFilter
           args:

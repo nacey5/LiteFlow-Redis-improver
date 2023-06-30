@@ -45,7 +45,7 @@ public class AKValidationFilter implements GlobalFilter, Ordered {
 
     private static final String AK_HEADER = "AK"; // AK在请求头中的字段名
     private static final String APPLY_AK_PATH =
-        "/api/ak/applyAK | /gray/ak/applyAK"; // 申请AK的路径
+        "/api/ak/applyAK | /green/ak/applyAK | /blue/ak/applyAK"; // 申请AK的路径
 
     private final GlobalAKHolder globalAKHolder;
 

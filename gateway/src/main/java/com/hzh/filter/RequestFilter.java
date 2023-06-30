@@ -38,20 +38,19 @@ public class RequestFilter implements GlobalFilter, Ordered {
         String targetUri = "";
 
         // 根据路由URI进行逻辑处理
-        if (routeUri.contains(defaultURI)) {
+        if (!routeUri.contains(defaultURI)) {
             // 根据服务标签进行灰度处理
             if (label != null && label.contains(GrayFilter.Config.COMMON_COLOR)) {
                 // 在灰度环境中执行相应逻辑
                 targetUri = blueURI;
                 targetUri = routeUri.replace(defaultURI, targetUri);
-                log.warn("targetUri->blue:{}", targetUri);
+                log.warn("targetUri->green:{}", targetUri);
                 // ...
             } else {
                 // 在正常环境中执行相应逻辑
                 targetUri = greenURI;
                 targetUri = routeUri.replace(defaultURI, targetUri);
-                targetUri = targetUri.replace("/api", "/gray");
-                log.warn("targetUri->green:{}", targetUri);
+                log.warn("targetUri->blue:{}", targetUri);
                 // ...
             }
             // 构建新的URI，将请求发送到 router1

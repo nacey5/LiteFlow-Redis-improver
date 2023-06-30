@@ -72,13 +72,14 @@ public class GatewayConfig implements WebFluxConfigurer {
                 // 在灰度环境中执行相应逻辑
                 targetUri = blueURI;
                 targetUri = routeUri.replace(defaultURI, targetUri);
+                targetUri = targetUri.replace("/api", "/green");
                 log.warn("targetUri->blue:{}", targetUri);
                 // ...
             } else {
                 // 在正常环境中执行相应逻辑
                 targetUri = greenURI;
                 targetUri = routeUri.replace(defaultURI, targetUri);
-                targetUri = targetUri.replace("/api", "/gray");
+                targetUri = targetUri.replace("/api", "/blue");
                 log.warn("targetUri->green:{}", targetUri);
                 // ...
             }
