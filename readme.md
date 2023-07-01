@@ -30,6 +30,7 @@
     - 模型：
     - 结构：
     如下图所示：
+![image](https://github.com/nacey5/LiteFlow-Redis-improver/assets/85286598/4db475dd-f1f5-4e0f-81e8-4df715a73899)
 
 
 bug: 
