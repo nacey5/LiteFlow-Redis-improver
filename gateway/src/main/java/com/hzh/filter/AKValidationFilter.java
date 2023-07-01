@@ -23,17 +23,21 @@ package com.hzh.filter;
 import com.hzh.holder.GlobalAKHolder;
 import com.hzh.liteflow_redis.service.AkRedisService;
 import com.hzh.util.OrderedUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -41,11 +45,11 @@ import java.util.Arrays;
  * @version : AKValidationFilter.java, v 0.1 2023-06-27 14:28 dahuang
  */
 @Component
+@Slf4j
 public class AKValidationFilter implements GlobalFilter, Ordered {
 
     private static final String AK_HEADER = "AK"; // AK在请求头中的字段名
-    private static final String APPLY_AK_PATH =
-        "/api/ak/applyAK | /green/ak/applyAK | /blue/ak/applyAK"; // 申请AK的路径
+    private static final String APPLY_AK_PATH = "/api/ak/applyAK | /green/ak/applyAK | /blue/ak/applyAK"; // 申请AK的路径
 
     private final GlobalAKHolder globalAKHolder;
 
@@ -94,11 +98,11 @@ public class AKValidationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean getAkInRedis(String ak) {
-        boolean ret=false;
+        boolean ret = false;
         String data = akRedisService.getValue(ak);
         if (StringUtils.isNotBlank(data)) {
-            ret=true;
-            globalAKHolder.setData(ak,data);
+            ret = true;
+            globalAKHolder.setData(ak, data);
         }
         return ret;
     }
@@ -111,13 +115,18 @@ public class AKValidationFilter implements GlobalFilter, Ordered {
     // 处理无效AK的响应
     private Mono<Void> handleInvalidAKResponse(ServerWebExchange exchange) {
         ServerHttpResponse response = exchange.getResponse();
-        response.setStatusCode(HttpStatus.UNAUTHORIZED); // 设置响应状态码为401 Unauthorized
-        return response.setComplete();
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+
+        String errorMessage = "Invalid AK";
+        byte[] responseBytes = errorMessage.getBytes(StandardCharsets.UTF_8);
+        DataBuffer buffer = response.bufferFactory().wrap(responseBytes);
+        return response.writeWith(Mono.just(buffer));
     }
 
     @Override
     public int getOrder() {
         // 设置过滤器的执行顺序，可以根据实际需求调整顺序
-        return OrderedUtil.MAX_CURE;
+        return OrderedUtil.FIRST;
     }
 }

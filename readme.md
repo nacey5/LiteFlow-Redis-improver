@@ -37,5 +37,23 @@ bug:
     1.目前如果单独在一个服务注册bean，在另外一个服务中并不会一起注册，所以需要在网关中去处理，出现需要双份注册的时候，由网关对两个部分的内容一起注册
         - 目前存在问题的接口：【在外部注册的需要全局去执行的】
         1:目前只存在于注册bean，因为分流之后，注册bean是存储在各自的分布器当中，所以我的解决方案是打算引入 规则业务执行，也就是上述引入的规则执行器
+         目前存在一个问题，因我不想开启服务发现导致平衡器无法正常的进行服务路由获取，所以有一下两种办法解决：
+        
+a.
+~~~java
+RestTemplate restTemplate = new RestTemplate();
+String greenRouteUrl = "http://green_route/api/beans/register-bean";
+String response = restTemplate.postForObject(greenRouteUrl, requestObject, String.class);
+~~~
+b. 
+~~~java
+WebClient webClient = WebClient.create();
+String greenRouteUrl = "http://green_route/api/beans/register-bean";
+Mono<String> responseMono = webClient.post()
+.uri(greenRouteUrl)
+.bodyValue(requestObject)
+.retrieve()
+.bodyToMono(String.class);
+~~~
     2.目前在拦截器拦截下没有AK认证的服务请求的时候并不会返回错误和提示信息和日志
 

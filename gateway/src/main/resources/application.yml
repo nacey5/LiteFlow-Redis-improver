@@ -1,5 +1,8 @@
 spring:
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true
     gateway:
       routes:
 #        - id: blue_route
@@ -47,6 +50,10 @@ uri:
   blue: http://127.0.0.1:9888
   green: http://127.0.0.1:9899
 
+myapp:
+  global-path: beans/register-bean | beans/register-bean2
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+

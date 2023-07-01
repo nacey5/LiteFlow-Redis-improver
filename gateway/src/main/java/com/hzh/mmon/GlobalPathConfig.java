@@ -18,21 +18,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hzh.config;
+package com.hzh.mmon;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-
 /**
  * @author dahuang
- * @version : EnableConfig.java, v 0.1 2023-06-29 00:17 dahuang
+ * @version : GlobalPath.java, v 0.1 2023-07-02 00:32 dahuang
  */
 @Configuration
-@EnableAspectJAutoProxy
-@ComponentScans({
-    @ComponentScan("com.hzh.*.**"),
-})
-public class EnableConfig {
+public class GlobalPathConfig {
+    @Value("${myapp.global-path}")
+    private String values;
 }
