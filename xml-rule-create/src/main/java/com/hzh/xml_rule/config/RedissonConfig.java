@@ -29,8 +29,6 @@ public class RedissonConfig {
         this.redissonClient = redissonClient;
     }
 
-
-
     @Bean
     public void registerMessageListener() {
         RTopic topic = redissonClient.getTopic(TOPIC);

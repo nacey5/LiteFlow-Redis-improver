@@ -54,4 +54,12 @@ public class RedisConfiguration {
             .setDatabase(2);
         return Redisson.create(config);
     }
+    @Bean
+    public RedissonClient redissonClient3() {
+        Config config = ConfigFactory.newDefaultRedissionConfig();
+        config.useSingleServer()
+            .setAddress("redis://127.0.0.1:6379")
+            .setDatabase(3);
+        return Redisson.create(config);
+    }
 }

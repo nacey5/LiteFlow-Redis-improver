@@ -6,6 +6,9 @@ import com.hzh.xml_rule.manager.tran.BeanManager;
 import com.hzh.xml_rule.service.IBeanService;
 import com.yomahub.liteflow.core.FlowExecutor;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
+import org.redisson.client.RedisClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -37,6 +40,11 @@ public class BeanManagerImpl implements BeanManager {
     @Resource
     private IBeanService beanService;
 
+    private final RedissonClient redissonClient;
+
+    public BeanManagerImpl(@Qualifier("redissonClient3") RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
+    }
 
     @Override
     @CustomMethodValidation
@@ -93,6 +101,12 @@ public class BeanManagerImpl implements BeanManager {
         Object o = beanClass.getDeclaredConstructor().newInstance();
 
         ((ConfigurableApplicationContext)applicationContext).getBeanFactory().registerSingleton(beanName, o);
+        //将当前的信息保存进redis中
+        saveBeanMsgToRedis(beanName,fullClassName);
         return o;
+    }
+
+    private void saveBeanMsgToRedis(String beanName, String fullClassName) {
+        redissonClient.getBucket(beanName).set(fullClassName);
     }
 }
