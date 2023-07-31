@@ -40,7 +40,7 @@ public class RequestFilter implements GlobalFilter, Ordered {
         String label = ColorAloUtil.selectColor(new String[] {"GREEN", "BLUE"}, new int[] {50, 100});
         String targetUri = "";
 
-        // 根据路由URI进行逻辑处理
+        // 根据路由URI进行逻辑处理 todo 这段代码好丑陋，bug改完之后要修正代码
         if (!routeUri.contains(defaultURI)) {
             // 根据服务标签进行灰度处理
             if (StringUtils.isNotBlank(exchange.getAttribute("color"))) {

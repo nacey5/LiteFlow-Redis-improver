@@ -1,0 +1,5 @@
+con.hzh.url=jdbc:mysql://localhost:3306/casbin?useSSL=false
+con.hzh.driver-class-name=com.mysql.jdbc.Driver
+con.hzh.username=root
+con.hzh.password=root
+con.hzh.model-path=authz_model.conf

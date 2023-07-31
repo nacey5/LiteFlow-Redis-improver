@@ -71,13 +71,15 @@ public class DualServerFilter implements GlobalFilter, Ordered {
                 .build();
             blueExchange.getAttributes().put("color","green");
 
-//            // 分别调用过滤器链，将请求转发到蓝色和绿色路由
-//            Mono<Void> blueResponse = chain.filter(blueExchange);
-//            Mono<Void> greenResponse = chain.filter(greenExchange);
+            // 分别调用过滤器链，将请求转发到蓝色和绿色路由
+            Mono<Void> blueResponse = chain.filter(blueExchange);
 
-            return chain.filter(blueExchange)
-                .flatMap(blueResponse -> chain.filter(greenExchange)
-                    .thenReturn(blueResponse));
+            Mono<Void> greenResponse = chain.filter(greenExchange);
+
+//            return chain.filter(blueExchange)
+//                .flatMap(blueResponse -> chain.filter(greenExchange)
+//                    .thenReturn(blueResponse));
+            return Mono.zip(blueResponse,greenResponse).then();
         }
 
         // 普通情况下，只发送请求到一个目标服务器

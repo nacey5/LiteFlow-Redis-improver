@@ -8,7 +8,7 @@ spring:
     web-application-type: reactive
 
 server:
-  port: 9888 #9899
+  port: 9899 #9899
 
 liteflow:
   rule-source: config/flow.el.xml
